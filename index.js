@@ -50,12 +50,12 @@ function dealCard() {
 
 // Calculate the card value. Aces are 11 points if current points + 11 is not higher than 21, else is 1
 function getCardValue(card) {
-  const lower = ["2", "3", "4", "5", "6", "7", "8", "9"];
-  const higher = ["10", "Jack", "Queen", "King"];
+  const lower = ['2', '3', '4', '5', '6', '7', '8', '9'];
+  const higher = ['10', 'Jack', 'Queen', 'King'];
 
-  const shortCard = card.split(" ")[0];
+  const shortCard = card.split(' ')[0];
 
-  if (shortCard === "Ace") {
+  if (shortCard === 'Ace') {
     if (points + 11 <= 21) {
       return 11;
     }
@@ -92,7 +92,7 @@ function startGame() {
   );
 
   if (!confirm) {
-    startGame();
+    return alert(`You stand with ${points} points`);
   } else {
     playRound();
   }
@@ -107,7 +107,7 @@ function playRound() {
   if (points === 21) {
     window.alert(`21! You drew ${drawCard}. Restarting game. \n
 Your hand: ${hand}`);
-    startGame();
+    return startGame();
   }
 
   if (points > 21) {
@@ -115,7 +115,7 @@ Your hand: ${hand}`);
       `Bust! You drew ${drawCard} and got ${points} points. Restarting game. \n
 Your hand: ${hand}`
     );
-    startGame();
+    return startGame();
   }
 
   const confirm = window.confirm(
@@ -124,10 +124,10 @@ Your hand: ${hand}`
   );
 
   if (!confirm) {
-    startGame();
-  } else {
-    playRound();
+    return alert(`You stand with ${points} points`);
   }
+
+  playRound();
 }
 
 startGame();
