@@ -17,6 +17,7 @@ const cards = [
 
 var deck = [];
 var hand = [];
+var handValues = [];
 var points = 0;
 
 // Shuffle array
@@ -72,13 +73,30 @@ function getCardValue(card) {
   }
 }
 
+function calculateHand(hand) {
+  points = 0;
+  const lower = ['2', '3', '4', '5', '6', '7', '8', '9'];
+  const higher = ['10', 'Jack', 'Queen', 'King'];
+
+  for (let i = 0; i < hand.length; i++) {
+    points += getCardValue(hand[i]);
+  }
+
+  for (let i = 0; i < hand.length; i++) {
+    const card = hand[i].split(' ')[0];
+    if (card === 'Ace' && points > 21) {
+      points -= 10;
+    }
+  }
+}
+
 // Start the game
 function startGame() {
   points = 0;
   deck = shuffle(cards);
   hand = [dealCard(), dealCard()];
 
-  points = getCardValue(hand[0]) + getCardValue(hand[1]);
+  calculateHand(hand);
 
   if (points === 21) {
     window.alert(
@@ -102,7 +120,8 @@ function startGame() {
 function playRound() {
   const drawCard = dealCard();
   hand.push(drawCard);
-  points += getCardValue(drawCard);
+  // points += getCardValue(drawCard);
+  calculateHand(hand);
 
   if (points === 21) {
     window.alert(`21! You drew ${drawCard}. Restarting game. \n
