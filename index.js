@@ -57,11 +57,7 @@ function getCardValue(card) {
   const shortCard = card.split(' ')[0];
 
   if (shortCard === 'Ace') {
-    if (points + 11 <= 21) {
-      return 11;
-    }
-
-    return 1;
+    return 11;
   }
 
   if (lower.includes(shortCard)) {
@@ -88,6 +84,8 @@ function calculateHand(hand) {
       points -= 10;
     }
   }
+
+  console.log(points);
 }
 
 // Start the game
