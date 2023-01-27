@@ -17,7 +17,6 @@ const cards = [
 
 var deck = [];
 var hand = [];
-var handValues = [];
 var points = 0;
 
 // Shuffle array
